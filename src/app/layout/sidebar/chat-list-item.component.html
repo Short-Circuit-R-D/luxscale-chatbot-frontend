@@ -1,0 +1,31 @@
+<div
+  class="group flex h-12 shrink-0 items-center gap-3 rounded-xl border-l-4 border-l-transparent px-2 text-muted transition-colors duration-[120ms] ease-out hover:bg-elevated hover:text-white [&:has(.is-active)]:border-l-accent [&:has(.is-active)]:bg-elevated [&:has(.is-active)]:text-white collapsed:justify-center collapsed:px-0"
+  [class.collapsed]="collapsed()"
+>
+  <a
+    class="flex min-w-0 flex-1 items-center gap-3 no-underline focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[-2px] collapsed-child:flex-none"
+    [routerLink]="['/chat', id()]"
+    routerLinkActive="is-active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    [attr.title]="collapsed() ? shortId() : null"
+  >
+    <svg lucideMessageCircle class="shrink-0" size="18" />
+    @if (!collapsed()) {
+      <span class="min-w-0 flex-1 truncate font-mono text-xs leading-[1.5]">{{ shortId() }}</span>
+    }
+  </a>
+  @if (!collapsed()) {
+    <button
+      type="button"
+      class="inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-xl bg-transparent text-disabled opacity-100 transition-[opacity,background-color,color] duration-[120ms] ease-out hover:bg-white/5 hover:text-white focus-visible:opacity-100 focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[-2px] group-hover:opacity-100 group-focus-within:opacity-100 group-has-[.is-active]:opacity-100 md:opacity-0"
+      [attr.aria-label]="(pinned() ? 'Unpin chat ' : 'Pin chat ') + shortId()"
+      (click)="togglePin()"
+    >
+      @if (pinned()) {
+        <svg lucidePin size="18" />
+      } @else {
+        <svg lucidePinOff size="18" />
+      }
+    </button>
+  }
+</div>

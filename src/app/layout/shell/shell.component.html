@@ -1,0 +1,33 @@
+<div class="relative flex h-full min-h-0 overflow-hidden">
+  @if (!smallScreen() || mobileOpen()) {
+    <app-sidebar />
+  }
+
+  @if (sidebarOverlayOpen()) {
+    <button
+      type="button"
+      class="fixed inset-0 z-[90] cursor-default bg-black/65"
+      aria-label="Close sidebar"
+      (click)="closeSidebar()"
+    ></button>
+  }
+
+  <main class="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
+    <header class="flex h-14 shrink-0 items-center px-3 md:hidden">
+      <button
+        type="button"
+        class="inline-flex size-10 cursor-pointer items-center justify-center rounded-xl bg-transparent text-muted transition-colors duration-[120ms] ease-out hover:bg-white/5 hover:text-white active:bg-white/10 focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+        aria-label="Open sidebar"
+        aria-haspopup="true"
+        [attr.aria-expanded]="mobileOpen()"
+        (click)="openSidebar()"
+      >
+        <svg lucidePanelLeftOpen size="20" />
+      </button>
+    </header>
+
+    <div class="min-h-0 flex-1 overflow-hidden">
+      <router-outlet />
+    </div>
+  </main>
+</div>

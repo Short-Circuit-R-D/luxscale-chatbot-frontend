@@ -1,0 +1,123 @@
+<aside
+  class="flex h-full min-h-0 w-[280px] shrink-0 flex-col overflow-hidden border-r border-line bg-surface transition-[width,border-color] duration-[180ms] ease-out collapsed:w-[80px] max-md:fixed max-md:inset-y-0 max-md:left-0 max-md:z-[100]"
+  [class.collapsed]="collapsed()"
+  aria-label="Chat history"
+>
+  <header
+    class="flex h-14 items-center justify-between gap-2 border-b border-line px-3 py-2 collapsed-child:justify-center collapsed-child:px-2"
+  >
+    @if (collapsed()) {
+      <button
+        type="button"
+        class="group inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-xl bg-transparent text-muted transition-colors duration-[120ms] ease-out hover:bg-white/5 hover:text-white active:bg-white/10 focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+        aria-expanded="false"
+        aria-label="Expand sidebar"
+        title="Expand sidebar"
+        (click)="toggleCollapsed()"
+      >
+        <img
+          ngSrc="favicon.svg"
+          alt=""
+          width="20"
+          height="20"
+          priority
+          class="h-5 w-5 shrink-0 group-hover:hidden group-focus-visible:hidden"
+        />
+        <svg
+          lucidePanelLeftOpen
+          class="hidden size-5 group-hover:block group-focus-visible:block"
+        />
+      </button>
+    } @else {
+      <img
+        ngSrc="luxscale-logo.svg"
+        alt="LuxScale"
+        width="106"
+        height="24"
+        priority
+        class="ml-1 h-6 w-auto"
+      />
+      <button
+        type="button"
+        class="inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-xl bg-transparent text-muted transition-colors duration-[120ms] ease-out hover:bg-white/5 hover:text-white active:bg-white/10 focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+        aria-expanded="true"
+        aria-label="Collapse sidebar"
+        title="Collapse sidebar"
+        (click)="toggleCollapsed()"
+      >
+        <svg lucidePanelLeftClose size="20" />
+      </button>
+    }
+  </header>
+
+  <nav
+    class="flex min-h-0 flex-1 flex-col gap-6 overflow-y-auto px-3 pb-6 pt-4"
+    aria-label="Chats"
+  >
+    <div class="flex shrink-0 flex-col items-center gap-1">
+      <a
+        class="inline-flex h-12 w-full shrink-0 cursor-pointer items-center gap-3 rounded-xl border-l-4 border-l-transparent px-2 text-muted no-underline transition-colors duration-[120ms] ease-out hover:bg-elevated hover:text-white focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[-2px] collapsed-child:size-10 collapsed-child:justify-center collapsed-child:px-0"
+        routerLink="/newchat"
+        [attr.title]="collapsed() ? 'New chat' : null"
+      >
+        <svg lucideMessageCirclePlus class="shrink-0" size="18" />
+        @if (!collapsed()) {
+          <span class="font-sans text-base font-medium leading-[1.5]">New chat</span>
+        }
+      </a>
+
+      <a
+        class="inline-flex h-12 w-full shrink-0 cursor-pointer items-center gap-3 rounded-xl border-l-4 border-l-transparent px-2 text-muted no-underline transition-colors duration-[120ms] ease-out hover:bg-elevated hover:text-white active-link:border-l-accent active-link:bg-elevated active-link:text-white focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[-2px] collapsed-child:size-10 collapsed-child:justify-center collapsed-child:px-0"
+        [routerLink]="['/chats']"
+        routerLinkActive="is-active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        [attr.title]="collapsed() ? 'Chats' : null"
+      >
+        <svg lucideMessagesSquare class="shrink-0" size="18" />
+        @if (!collapsed()) {
+          <span class="font-sans text-base font-medium leading-[1.5]">Chats</span>
+        }
+      </a>
+    </div>
+
+    @if (!collapsed()) {
+      @if (pinnedIds().length > 0) {
+        <section class="flex shrink-0 flex-col gap-1" aria-label="Pinned chats">
+          <h2
+            class="px-2 pb-2 font-sans text-[11px] font-medium uppercase leading-[1.5] tracking-[0.1em] text-disabled"
+          >
+            Pinned
+          </h2>
+          @for (id of pinnedIds(); track id) {
+            <app-chat-list-item
+              class="shrink-0"
+              [id]="id"
+              [pinned]="true"
+              [collapsed]="collapsed()"
+            />
+          }
+        </section>
+      }
+
+      <section class="flex shrink-0 flex-col gap-1" aria-label="Recent chats">
+        <h2
+          class="px-2 pb-2 font-sans text-[11px] font-medium uppercase leading-[1.5] tracking-[0.1em] text-disabled"
+        >
+          Recent
+        </h2>
+        @if (recentIds().length > 0) {
+          @for (id of recentIds().slice(0, 10); track id) {
+            <app-chat-list-item
+              class="shrink-0"
+              [id]="id"
+              [pinned]="false"
+              [collapsed]="collapsed()"
+            />
+          }
+        } @else {
+          <p class="m-0 px-2 text-sm leading-[1.6] text-disabled">No recent chats</p>
+        }
+      </section>
+    }
+  </nav>
+</aside>

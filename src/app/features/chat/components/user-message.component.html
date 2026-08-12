@@ -1,0 +1,10 @@
+<article class="flex w-full justify-end" aria-label="Your message">
+  <div class="max-w-[min(85%,640px)] rounded-3xl rounded-br-lg bg-elevated px-4 py-3 sm:px-5">
+    <p class="m-0 whitespace-pre-wrap break-words text-[15px] leading-[1.65] text-white">
+      {{ content() }}
+    </p>
+    @if (timestamp()) {
+      <time class="sr-only" [attr.datetime]="timestamp()">Sent at {{ timestamp() }}</time>
+    }
+  </div>
+</article>

@@ -1,0 +1,27 @@
+<div
+  class="w-full rounded-2xl border border-line bg-surface shadow-[0_12px_40px_rgba(0,0,0,0.24)] transition-[border-color,box-shadow] duration-[120ms] ease-out hover:border-line-hover focus-within:border-line-hover focus-within:ring-2 focus-within:ring-accent/40"
+>
+  <textarea
+    #messageInput
+    rows="3"
+    class="block max-h-[200px] min-h-14 w-full resize-none overflow-y-auto bg-transparent px-4 pb-2 pt-4 font-sans text-base leading-[1.5] text-white placeholder:text-disabled focus:outline-none disabled:cursor-not-allowed disabled:opacity-60 [scrollbar-width:thin]"
+    [placeholder]="placeholder()"
+    [value]="draft()"
+    [disabled]="pending()"
+    aria-label="Chat message"
+    (input)="onInput(messageInput)"
+    (keydown.enter)="onEnter($event, messageInput)"
+  ></textarea>
+
+  <div class="flex items-center justify-end px-3 pb-3">
+    <button
+      type="button"
+      class="inline-flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-lg bg-accent text-white transition-[background-color,color] duration-[180ms] ease-out hover:bg-accent-dark disabled:cursor-not-allowed disabled:bg-white/5 disabled:text-disabled focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+      [disabled]="!canSend()"
+      [attr.aria-label]="pending() ? 'Waiting for response' : 'Send message'"
+      (click)="submit(messageInput)"
+    >
+      <svg lucideArrowUp class="size-5" />
+    </button>
+  </div>
+</div>

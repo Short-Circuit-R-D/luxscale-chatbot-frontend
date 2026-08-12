@@ -1,0 +1,40 @@
+<div
+  class="mx-auto flex h-full w-full max-w-[768px] flex-col overflow-y-auto overscroll-contain px-4 py-6 sm:px-6 md:py-12"
+>
+  <p
+    class="m-0 mb-4 font-sans text-[11px] font-medium uppercase leading-[1.5] tracking-[0.1em] text-accent"
+  >
+    Chats
+  </p>
+  <h1 class="m-0 mb-6 font-sans text-2xl font-medium leading-[1.2] sm:mb-8 sm:text-[32px]">
+    All conversations
+  </h1>
+
+  @if (pinnedIds().length > 0) {
+    <section class="mb-8 flex flex-col gap-1" aria-label="Pinned chats">
+      <h2
+        class="mb-2 px-2 font-sans text-[11px] font-medium uppercase leading-[1.5] tracking-[0.1em] text-disabled"
+      >
+        Pinned
+      </h2>
+      @for (id of pinnedIds(); track id) {
+        <app-chat-list-item [id]="id" [pinned]="true" />
+      }
+    </section>
+  }
+
+  <section class="flex flex-col gap-1" aria-label="All chats">
+    <h2
+      class="mb-2 px-2 font-sans text-[11px] font-medium uppercase leading-[1.5] tracking-[0.1em] text-disabled"
+    >
+      Recent
+    </h2>
+    @if (recentIds().length > 0) {
+      @for (id of recentIds(); track id) {
+        <app-chat-list-item [id]="id" [pinned]="false" />
+      }
+    } @else {
+      <p class="m-0 px-2 text-sm leading-[1.6] text-disabled">No chats yet</p>
+    }
+  </section>
+</div>
