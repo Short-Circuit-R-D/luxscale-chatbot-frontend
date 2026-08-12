@@ -13,7 +13,10 @@
       <span>Thinking…</span>
     </div>
   } @else if (error()) {
-    <div class="rounded-xl border border-accent/40 bg-accent/10 px-4 py-3 text-sm text-white" role="alert">
+    <div
+      class="rounded-xl border border-accent/40 bg-accent/10 px-4 py-3 text-sm text-white"
+      role="alert"
+    >
       {{ error() }}
     </div>
   } @else {
@@ -21,5 +24,8 @@
     @if (timestamp()) {
       <time class="sr-only" [attr.datetime]="timestamp()">Responded at {{ timestamp() }}</time>
     }
+    <div class="mt-2">
+      <app-copy-content-button [content]="content()" label="Copy assistant response" />
+    </div>
   }
 </article>

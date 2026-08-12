@@ -1,7 +1,10 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
+import { CopyContentButton } from './copy-content-button.component';
+
 @Component({
   selector: 'app-user-message',
+  imports: [CopyContentButton],
   templateUrl: './user-message.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

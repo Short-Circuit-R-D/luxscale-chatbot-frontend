@@ -2,8 +2,11 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 import DOMPurify from 'dompurify';
 import { marked } from 'marked';
 
+import { CopyContentButton } from './copy-content-button.component';
+
 @Component({
   selector: 'app-assistant-response',
+  imports: [CopyContentButton],
   templateUrl: './assistant-response.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
