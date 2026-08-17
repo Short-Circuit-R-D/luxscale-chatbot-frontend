@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, input } from '@an
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { LucideMessageCircle, LucidePin, LucidePinOff } from '@lucide/angular';
 
-import { ChatHistoryStore } from '../../stores/chat-history.store';
+import { ChatHistoryStore } from '../../../stores/chat-history.store';
 
 @Component({
   selector: 'app-chat-list-item',

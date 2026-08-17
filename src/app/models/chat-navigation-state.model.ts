@@ -1,4 +1,4 @@
-import { ChatTurn } from '../../services/chatbot.service';
+import { ChatTurn } from './chat-turn.model';
 
 export interface ChatNavigationState {
   sessionId: string;

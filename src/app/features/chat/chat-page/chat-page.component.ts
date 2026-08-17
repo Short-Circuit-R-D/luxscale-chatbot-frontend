@@ -13,12 +13,13 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { distinctUntilChanged, map } from 'rxjs';
 
-import { ChatbotService, ChatTurn } from '../../services/chatbot.service';
-import { ChatHistoryStore } from '../../stores/chat-history.store';
-import { ChatNavigationState } from './chat-navigation-state';
-import { AssistantResponse } from './components/assistant-response.component';
-import { ChatComposer } from './components/chat-composer.component';
-import { UserMessage } from './components/user-message.component';
+import { ChatTurn } from '../../../models/chat-turn.model';
+import { ChatNavigationState } from '../../../models/chat-navigation-state.model';
+import { ChatbotService } from '../../../services/chatbot.service';
+import { ChatHistoryStore } from '../../../stores/chat-history.store';
+import { AssistantResponse } from '../components/assistant-response/assistant-response.component';
+import { ChatComposer } from '../components/chat-composer/chat-composer.component';
+import { UserMessage } from '../components/user-message/user-message.component';
 
 @Component({
   selector: 'app-chat-page',
@@ -99,6 +100,7 @@ export class ChatPage {
               role: 'assistant',
               content: result.response,
               timestamp: new Date().toISOString(),
+              simulator: result.simulator,
             },
           ]);
           this.chatHistoryStore.addChat(result.session_id);

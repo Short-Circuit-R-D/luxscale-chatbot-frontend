@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
-import { ChatListItem } from '../../layout/sidebar/chat-list-item.component';
-import { ChatHistoryStore } from '../../stores/chat-history.store';
+import { ChatListItem } from '../../../layout/sidebar/chat-list-item/chat-list-item.component';
+import { ChatHistoryStore } from '../../../stores/chat-history.store';
 
 @Component({
   selector: 'app-chats-page',

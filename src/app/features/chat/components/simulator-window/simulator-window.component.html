@@ -1,0 +1,53 @@
+<button
+  type="button"
+  class="absolute inset-0 cursor-default bg-black/75"
+  aria-label="Close simulator"
+  (click)="closed.emit()"
+></button>
+
+<div
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="simulator-window-title"
+  tabindex="-1"
+  class="simulator-window-panel relative z-[1] flex h-full w-full flex-col overflow-hidden border-line bg-surface md:h-[min(80vh,720px)] md:max-w-[960px] md:rounded-xl md:border md:shadow-[0_16px_48px_rgba(0,0,0,0.22)]"
+>
+  <header class="flex h-12 shrink-0 items-center gap-3 border-b border-line px-3 sm:px-4">
+    <h2
+      id="simulator-window-title"
+      class="m-0 min-w-0 flex-1 truncate text-sm font-medium leading-none"
+    >
+      {{ title() }}
+    </h2>
+    <div class="flex shrink-0 items-center gap-1">
+      <button
+        type="button"
+        class="inline-flex size-8 items-center justify-center rounded-lg text-muted transition-colors duration-[180ms] ease-out hover:bg-elevated hover:text-white focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+        aria-label="Reload simulator"
+        (click)="reload()"
+      >
+        <svg lucideRotateCw size="16" aria-hidden="true" />
+      </button>
+      <button
+        #closeButton
+        type="button"
+        class="inline-flex size-8 items-center justify-center rounded-lg text-muted transition-colors duration-[180ms] ease-out hover:bg-elevated hover:text-white focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+        aria-label="Close simulator"
+        (click)="closed.emit()"
+      >
+        <svg lucideX size="16" aria-hidden="true" />
+      </button>
+    </div>
+  </header>
+
+  <div class="min-h-0 min-w-0 flex-1 bg-black">
+    <iframe
+      #frame
+      class="h-full w-full border-0"
+      [src]="trustedUrl()"
+      [title]="title()"
+      referrerpolicy="no-referrer"
+      sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+    ></iframe>
+  </div>
+</div>

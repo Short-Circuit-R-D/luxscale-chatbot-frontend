@@ -3,30 +3,9 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { API_BASE_URL } from '../config/api.config';
-
-export type ChatRole = 'user' | 'assistant';
-
-export interface SendMessageRequest {
-  session_id?: string;
-  message: string;
-}
-
-export interface SendMessageResponse {
-  session_id: string;
-  response: string;
-  intent: string;
-}
-
-export interface ChatTurn {
-  role: ChatRole;
-  content: string;
-  timestamp: string;
-}
-
-export interface ChatSessionResponse {
-  session_id: string;
-  messages: ChatTurn[];
-}
+import { ChatSessionResponse } from '../dtos/chat-session-response.dto';
+import { SendMessageRequest } from '../dtos/send-message-request.dto';
+import { SendMessageResponse } from '../dtos/send-message-response.dto';
 
 @Injectable({ providedIn: 'root' })
 export class ChatbotService {

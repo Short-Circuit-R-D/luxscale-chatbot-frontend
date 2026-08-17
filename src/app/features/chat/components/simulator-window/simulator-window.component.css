@@ -1,0 +1,27 @@
+:host {
+  animation: simulator-window-fade 180ms ease-out;
+}
+
+.simulator-window-panel {
+  animation: simulator-window-enter 180ms ease-out;
+}
+
+@keyframes simulator-window-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes simulator-window-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

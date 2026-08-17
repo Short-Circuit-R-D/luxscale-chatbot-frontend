@@ -27,5 +27,33 @@
     <div class="mt-2">
       <app-copy-content-button [content]="content()" label="Copy assistant response" />
     </div>
+    @if (simulator(); as sim) {
+      <button
+        #simulatorTrigger
+        type="button"
+        class="mt-4 flex min-h-[180px] w-full cursor-pointer flex-col items-center justify-center gap-6 rounded-xl border border-line bg-surface px-6 py-8 text-left transition-[border-color,box-shadow] duration-[180ms] ease-out hover:border-line-hover hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+        [attr.aria-label]="'Load simulator: ' + sim.title"
+        (click)="openSimulator()"
+      >
+        <span
+          class="m-0 font-sans text-[11px] font-medium uppercase leading-[1.5] tracking-[0.1em] text-muted"
+        >
+          {{ sim.title }}
+        </span>
+        <span
+          class="inline-flex h-11 items-center justify-center rounded-xl bg-accent px-5 text-sm font-medium text-white"
+        >
+          LOAD
+        </span>
+      </button>
+    }
   }
 </article>
+
+@if (simulatorOpen() && simulator(); as sim) {
+  <app-simulator-window
+    [title]="sim.title"
+    [iframeUrl]="sim.iframe_url"
+    (closed)="closeSimulator()"
+  />
+}

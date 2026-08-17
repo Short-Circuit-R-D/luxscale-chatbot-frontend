@@ -1,9 +1,6 @@
 import { Injectable, computed, effect, signal } from '@angular/core';
 
-export interface ChatHistoryState {
-  recentIds: string[];
-  pinnedIds: string[];
-}
+import { ChatHistoryState } from '../models/chat-history-state.model';
 
 const STORAGE_KEY = 'luxscale.chat-history';
 

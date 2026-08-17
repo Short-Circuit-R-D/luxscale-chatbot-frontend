@@ -3,12 +3,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { LucideMessageSquare } from '@lucide/angular';
 
-import { ChatNavigationState } from '../chat/chat-navigation-state';
-import { AssistantResponse } from '../chat/components/assistant-response.component';
-import { ChatComposer } from '../chat/components/chat-composer.component';
-import { UserMessage } from '../chat/components/user-message.component';
-import { ChatbotService } from '../../services/chatbot.service';
-import { ChatHistoryStore } from '../../stores/chat-history.store';
+import { ChatNavigationState } from '../../../models/chat-navigation-state.model';
+import { ChatbotService } from '../../../services/chatbot.service';
+import { ChatHistoryStore } from '../../../stores/chat-history.store';
+import { AssistantResponse } from '../../chat/components/assistant-response/assistant-response.component';
+import { ChatComposer } from '../../chat/components/chat-composer/chat-composer.component';
+import { UserMessage } from '../../chat/components/user-message/user-message.component';
 
 @Component({
   selector: 'app-new-chat-page',
@@ -55,6 +55,7 @@ export class NewChatPage {
                 role: 'assistant',
                 content: result.response,
                 timestamp: new Date().toISOString(),
+                simulator: result.simulator,
               },
             ],
           };

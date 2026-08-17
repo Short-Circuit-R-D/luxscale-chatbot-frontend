@@ -10,7 +10,7 @@ import {
 
 import { ChatHistoryStore } from '../../stores/chat-history.store';
 import { SidebarStore } from '../../stores/sidebar.store';
-import { ChatListItem } from './chat-list-item.component';
+import { ChatListItem } from './chat-list-item/chat-list-item.component';
 
 @Component({
   selector: 'app-sidebar',

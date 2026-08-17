@@ -12,22 +12,7 @@ import { LucideCheck, LucideCopy } from '@lucide/angular';
 @Component({
   selector: 'app-copy-content-button',
   imports: [LucideCheck, LucideCopy],
-  template: `
-    <button
-      type="button"
-      class="inline-flex size-8 items-center justify-center rounded-lg text-muted transition-colors hover:bg-elevated hover:text-white focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
-      [attr.aria-label]="copied() ? 'Copied to clipboard' : label()"
-      [title]="copied() ? 'Copied' : label()"
-      (click)="copy()"
-    >
-      @if (copied()) {
-        <svg lucideCheck size="16" aria-hidden="true" />
-      } @else {
-        <svg lucideCopy size="16" aria-hidden="true" />
-      }
-    </button>
-    <span class="sr-only" aria-live="polite">{{ status() }}</span>
-  `,
+  templateUrl: './copy-content-button.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CopyContentButton {
